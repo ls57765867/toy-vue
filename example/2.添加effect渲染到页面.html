@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {reactive,effect} = VueReactive
+    const data = {name:'zs',age:18}
+    const state = reactive(data)
+    effect(()=>{
+        document.querySelector('#app').innerHTML = state.name
+    })
+
+    state.name = '哈哈哈哈'
+</script>
+</body>
+</html>

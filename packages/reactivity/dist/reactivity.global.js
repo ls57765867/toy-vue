@@ -20,6 +20,7 @@ var VueReactive = (() => {
   // packages/reactivity/src/index.ts
   var src_exports = {};
   __export(src_exports, {
+    effect: () => effect,
     reactive: () => reactive
   });
 
@@ -28,17 +29,81 @@ var VueReactive = (() => {
     return val !== null && typeof val === "object";
   };
 
+  // packages/reactivity/src/effect.ts
+  var activeEffect = null;
+  var targetMap = /* @__PURE__ */ new WeakMap();
+  var ReactiveEffect = class {
+    constructor(fn, scheduler) {
+      this.fn = fn;
+      this.scheduler = scheduler;
+      this.active = true;
+      this.deps = [];
+      this.parent = null;
+    }
+    run() {
+      if (!this.active)
+        return this.fn();
+      try {
+        this.parent = activeEffect;
+        activeEffect = this;
+        this.fn();
+      } finally {
+        activeEffect = this.parent;
+      }
+    }
+  };
+  var effect = (fn, options = {}) => {
+    const _effect = new ReactiveEffect(fn, options.scheduler);
+    _effect.run();
+  };
+  var track = (target, key) => {
+    let depsMap = targetMap.get(target);
+    if (!depsMap) {
+      targetMap.set(target, depsMap = /* @__PURE__ */ new Map());
+    }
+    let deps = depsMap.get(key);
+    if (!deps) {
+      depsMap.set(key, deps = /* @__PURE__ */ new Set());
+    }
+    trackEffect(deps);
+  };
+  var trackEffect = (deps) => {
+    if (!activeEffect)
+      return;
+    if (!deps.has(activeEffect)) {
+      deps.add(activeEffect);
+      activeEffect.deps.push(deps);
+    }
+  };
+  var trigger = (target, key) => {
+    const depsMap = targetMap.get(target);
+    if (!depsMap)
+      return;
+    const effects = depsMap.get(key);
+    triggerEffect(effects);
+  };
+  var triggerEffect = (effects) => {
+    const _effects = new Set(effects);
+    _effects.forEach((effect2) => {
+      if (effect2 !== activeEffect) {
+        effect2.run();
+      }
+    });
+  };
+
   // packages/reactivity/src/baseHandler.ts
   var mutableHandlers = {
     get(target, key) {
       if (key === "__v_isReactive" /* IS_REACTIVE */) {
         return true;
       }
+      track(target, key);
       return Reflect.get(target, key);
     },
     set(target, key, value) {
       const oldValue = target[key];
       const res = Reflect.set(target, key, value);
+      trigger(target, key);
       return res;
     }
   };
