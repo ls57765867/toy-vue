@@ -1,0 +1,18 @@
+{
+  "name": "toy-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node scripts/build/dev.js reactivity -f global"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.15.5",
+    "minimist": "^1.2.6",
+    "typescript": "^4.7.4"
+  }
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<script>
+    const {reactive} = VueReactive
+    const data = {name:'zs',age:18}
+    const state = reactive(data)
+    const state2 = reactive(data)
+    const state3 = reactive(state)
+    console.log(state === state2); // 应该为true
+    console.log(state === state3); // 应该为true
+</script>
+</body>
+</html>
