@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {reactive,effect} = VueReactive
+    const data = {age:888}
+    const state = reactive(data)
+    const runner = effect(()=>{
+        document.querySelector('#app').innerHTML = state.age + ''
+    },{
+       scheduler(){
+           console.log(state.age) // 传入了scheduler ，会执行scheduler，页面不会直接更新，但会打印出最新值
+           setTimeout(()=>{
+               runner() //2s后执行run方法更新为19
+           },2000)
+       }
+    })
+    state.age = 19
+
+</script>
+</body>
+</html>

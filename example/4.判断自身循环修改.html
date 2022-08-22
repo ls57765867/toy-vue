@@ -10,15 +10,14 @@
 <script>
 
     const {reactive,effect} = VueReactive
-    const data = {name:'zs',age:18}
+    const data = {age:888}
     const state = reactive(data)
     effect(()=>{
-        document.querySelector('#app').innerHTML = state.name
+        // 代码中不添加 effect !== activeEffect 会导致无限循环爆栈
+        document.querySelector('#app').innerHTML = state.age + ''
+        state.age = Math.random()
     })
 
-    setTimeout(()=>{
-        state.name = '哈哈哈哈' //页面1秒后更新
-    },1000)
 </script>
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {reactive, effect, watch} = VueReactive
+    const data = {age: 888}
+    const state = reactive(data)
+    watch(state, (newValue, oldValue, onCleanup) => {
+        onCleanup(() => { // 清理回调函数 会在下一次watch执行前先执行
+            console.log('来了老弟？');  // 第一次不执行 第二次及以后在watch函数执行前执行
+        })
+        console.log(newValue, oldValue) // 都为 {age:19}
+    })
+    state.age = 19
+    state.age = 20
+    state.age = 21
+    state.age = 22
+
+</script>
+</body>
+</html>

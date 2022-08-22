@@ -10,14 +10,16 @@
 <script>
 
     const {reactive,effect} = VueReactive
-    const data = {name:'zs',age:18}
+    const data = {flag:true,name:'张三',age:888}
     const state = reactive(data)
     effect(()=>{
-        document.querySelector('#app').innerHTML = state.name
+        console.log('更新') // 添加了cleanup后应该只触发两次更新
+        document.querySelector('#app').innerHTML = state.flag ? state.name : state.age
     })
 
+    state.flag = false
     setTimeout(()=>{
-        state.name = '哈哈哈哈' //页面1秒后更新
+        state.name = '刘帅' // flag为false后 依赖中应该只收集flag与age 不应收集name
     },1000)
 </script>
 </body>

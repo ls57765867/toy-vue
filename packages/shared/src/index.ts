@@ -1,9 +1,16 @@
+export const enum ReactiveFlags {
+    IS_REACTIVE = '__v_isReactive'
+}
 
 export const isObject = (val) => {
     return val !== null && typeof val === "object";
 };
 
 export const isString = (val) => typeof val === "string";
+
+export const isReactive = val => !!val?.[ReactiveFlags.IS_REACTIVE]
+
+export const isFunction = val => typeof val === 'function'
 
 const camelizeRE = /-(\w)/g;
 /**

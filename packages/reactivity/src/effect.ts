@@ -1,6 +1,14 @@
 let activeEffect = null
 const targetMap = new WeakMap()
 
+export const effect = (fn, options: any = {}) => {
+    const _effect = new ReactiveEffect(fn, options.scheduler)
+    _effect.run()
+    const runner = _effect.run.bind(_effect)
+    runner.effect = _effect
+    return runner
+}
+
 export class ReactiveEffect {
     public active = true
     public deps = []
@@ -14,18 +22,27 @@ export class ReactiveEffect {
         try {
             this.parent = activeEffect
             activeEffect = this
-            this.fn()
+            cleanupEffect(this)
+            return this.fn()
         } finally {
             activeEffect = this.parent
         }
 
     }
+    stop(){
+        this.active = false
+        cleanupEffect(this)
+    }
+}
+export const cleanupEffect = (effect)=>{
+    const deps = effect.deps
+    deps.forEach(effects => {
+        effects.delete(effect)
+    })
+    effect.deps.length = 0
 }
 
-export const effect = (fn, options: any = {}) => {
-    const _effect = new ReactiveEffect(fn, options.scheduler)
-    _effect.run()
-}
+
 
 export const track = (target, key) => {
     let depsMap = targetMap.get(target)
@@ -56,7 +73,12 @@ export const triggerEffect = (effects)=>{
     const _effects:any = new Set(effects)
     _effects.forEach(effect => {
         if(effect !== activeEffect){
-            effect.run()
+            const scheduler = effect.scheduler
+            if(scheduler){
+                scheduler()
+            }else{
+                effect.run()
+            }
         }
     })
 }

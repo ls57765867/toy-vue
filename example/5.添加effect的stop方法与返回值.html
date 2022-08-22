@@ -10,15 +10,16 @@
 <script>
 
     const {reactive,effect} = VueReactive
-    const data = {name:'zs',age:18}
+    const data = {age:888}
     const state = reactive(data)
-    effect(()=>{
-        document.querySelector('#app').innerHTML = state.name
+    const runner = effect(()=>{
+        document.querySelector('#app').innerHTML = state.age + ''
     })
+    runner.effect.stop()
+    state.age = 19 // 因为调用了 stop 方法此时状态应为888
+    debugger
+    runner() // 调用runner后变为19
 
-    setTimeout(()=>{
-        state.name = '哈哈哈哈' //页面1秒后更新
-    },1000)
 </script>
 </body>
 </html>

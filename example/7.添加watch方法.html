@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {reactive, effect, watch} = VueReactive
+    const data = {age: 888}
+    const state = reactive(data)
+    watch(state, (newValue, oldValue) => {
+        console.log(newValue, oldValue) // 都为 {age:19}
+    })
+    watch(() => state.age, (newValue, oldValue) => {
+        console.log(newValue, oldValue) // 19 888
+    })
+    state.age = 19
+
+</script>
+</body>
+</html>
