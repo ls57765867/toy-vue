@@ -1,5 +1,6 @@
 export const enum ReactiveFlags {
-    IS_REACTIVE = '__v_isReactive'
+    IS_REACTIVE = '__v_isReactive',
+    IS_REF = '__v_isRef'
 }
 
 export const isObject = (val) => {
@@ -9,6 +10,8 @@ export const isObject = (val) => {
 export const isString = (val) => typeof val === "string";
 
 export const isReactive = val => !!val?.[ReactiveFlags.IS_REACTIVE]
+
+export const isRef = val => !!val?.[ReactiveFlags.IS_REF]
 
 export const isFunction = val => typeof val === 'function'
 

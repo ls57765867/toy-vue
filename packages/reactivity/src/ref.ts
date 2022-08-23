@@ -1,5 +1,5 @@
 import {trackEffect, triggerEffect} from "./effect";
-import {isObject, isArray} from "@ls-toy-vue/shared";
+import {isObject, isArray, isReactive, isRef} from "@ls-toy-vue/shared";
 import {reactive} from "./reactive";
 
 const toReactive = (val) => {
@@ -64,4 +64,25 @@ export const toRefs = (object) => {
 
     return result
 }
+const unref = (ref)=> {
+    return isRef(ref) ? ref.value : ref
+}
 
+const shallowUnwrapHandlers = {
+    get(target,key,receiver){
+        return unref(Reflect.get(target,key,receiver))
+    },
+    set(target,key,value,receiver){
+        const oldValue = target[key]
+        if(isRef(oldValue) && !isRef(value)){
+            oldValue.value = value
+            return true
+        }else {
+            return Reflect.set(target,key,value,receiver)
+        }
+    }
+}
+
+export const proxyRefs = (objectWithRefs) => {
+    return isReactive(objectWithRefs) ? objectWithRefs : new Proxy(objectWithRefs,shallowUnwrapHandlers)
+}

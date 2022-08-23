@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {reactive, effect, ref, proxyRefs} = VueReactive
+    const name = ref('张三')
+    const age = ref(18)
+    const _ctx = proxyRefs({name,age})
+    effect(() => {
+        document.querySelector('#app').innerHTML = _ctx.name + _ctx.age
+    })
+</script>
+</body>
+</html>
