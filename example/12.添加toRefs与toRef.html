@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {reactive, effect, toRefs} = VueReactive
+    const data = {firstname: '张', lastname: '三'}
+    const state = reactive(data)
+    const {firstname, lastname} = toRefs(state)
+    effect(() => {
+        document.querySelector('#app').innerHTML = firstname.value + lastname.value
+    })
+    setInterval(()=>{
+        firstname.value+= 's'
+        state.lastname+= 'b'
+    },1000)
+</script>
+</body>
+</html>

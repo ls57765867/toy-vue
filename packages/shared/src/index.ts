@@ -12,6 +12,8 @@ export const isReactive = val => !!val?.[ReactiveFlags.IS_REACTIVE]
 
 export const isFunction = val => typeof val === 'function'
 
+export const isArray = Array.isArray
+
 const camelizeRE = /-(\w)/g;
 /**
  * @private
