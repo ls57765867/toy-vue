@@ -16,6 +16,7 @@
     effect(() => {
         document.querySelector('#app').innerHTML = firstname.value + lastname.value
     })
+    // toRefs只是对state进行代理 修改toRefs结构后的value 还是修改state内容
     setInterval(()=>{
         firstname.value+= 's'
         state.lastname+= 'b'
