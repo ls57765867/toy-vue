@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {reactive, effect, computed} = VueReactive
+    const data = {firstname:'张',lastname:'三'}
+    const state = reactive(data)
+    const fullname = computed(()=>{
+        console.log('哈哈哈'); // 只应该触发2次
+        return state.firstname + state.lastname
+    })
+    effect(()=>{
+        document.querySelector('#app').innerHTML = fullname.value
+    })
+
+    state.firstname = '李'
+    state.firstname = '李'
+    state.firstname = '李'
+    state.firstname = '李'
+    fullname.value = 123 // 报错
+</script>
+</body>
+</html>

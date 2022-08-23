@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {ref, effect} = VueReactive
+    const flag = ref(true)
+    effect(() => {
+        document.querySelector('#app').innerHTML = flag.value ? '科比' : '乔丹'
+    })
+
+    setInterval(()=>{
+        flag.value = !flag.value
+    },1000)
+</script>
+</body>
+</html>

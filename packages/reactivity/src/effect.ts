@@ -18,8 +18,8 @@ export class ReactiveEffect {
     }
 
     run() {
-        if (!this.active) return this.fn()
         try {
+            if (!this.active) return this.fn()
             this.parent = activeEffect
             activeEffect = this
             cleanupEffect(this)
@@ -30,13 +30,15 @@ export class ReactiveEffect {
 
     }
     stop(){
-        this.active = false
-        cleanupEffect(this)
+        if(this.active){
+            this.active = false
+            cleanupEffect(this)
+        }
+
     }
 }
 export const cleanupEffect = (effect)=>{
-    const deps = effect.deps
-    deps.forEach(effects => {
+    effect.deps.forEach(effects => {
         effects.delete(effect)
     })
     effect.deps.length = 0
@@ -67,6 +69,7 @@ export const trigger = (target, key) => {
     const depsMap = targetMap.get(target)
     if (!depsMap) return
     const effects = depsMap.get(key)
+    if(!effects) return;
     triggerEffect(effects)
 }
 export const triggerEffect = (effects)=>{
