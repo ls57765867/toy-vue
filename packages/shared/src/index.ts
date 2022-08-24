@@ -1,6 +1,7 @@
 export const enum ReactiveFlags {
     IS_REACTIVE = '__v_isReactive',
-    IS_REF = '__v_isRef'
+    IS_REF = '__v_isRef',
+    IS_READONLY = '__v_isReadonly'
 }
 
 export const isObject = (val) => {
@@ -15,9 +16,11 @@ export const isRef = val => !!val?.[ReactiveFlags.IS_REF]
 
 export const isFunction = val => typeof val === 'function'
 
-export const isArray = Array.isArray
+export const isReadonly = val => !!val[ReactiveFlags.IS_READONLY]
 
 const camelizeRE = /-(\w)/g;
+
+export const isArray = Array.isArray
 /**
  * @private
  * 把烤肉串命名方式转换成驼峰命名方式

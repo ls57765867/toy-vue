@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+
+    const {readonly,shallowReadonly,} = VueReactive
+    // 1.深层的readonly
+    const state = readonly({person: {name: 'zs'}})
+
+    state.person.name = 'ls' //警告
+    delete state.person.name //警告
+    console.log(state.person.name); // 依旧为zs
+    console.log(state.person.__v_isReadonly); // 应该为ture
+    // 2.shallow的readonly
+    const state2 = shallowReadonly({person: {name: 'zs'}})
+    state2.person.name = '李四' // 可以修改
+    console.log(state2.person.name); // 李四
+    console.log(state2.person.__v_isReadonly); // 应该为undefined
+</script>
+</body>
+</html>
