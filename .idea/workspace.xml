@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5984fd62-d140-4839-a931-cf7eca4e3246" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/example/14.添加readonly方法.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/15.添加toRow方法.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/16.添加markRow方法.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/17.部分数组内置方法处理.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/18.添加isNonTrackableKeys函数.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/19.支持脱ref.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/20.reactive参数为数组时取消脱ref.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/21.添加shallow方法.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/22.reactive添加delete方法.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/23.处理直接修改数组中的length.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/24.添加脱ref功能.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/10.测试computed的set方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/10.添加computed的set方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/14.添加readonly方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/14.添加readonly方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/15.添加toRow方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/17.添加toRaw方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/16.添加markRow方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/18.添加markRow方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/17.部分数组内置方法处理.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/21.重写响应式中的8种数组方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/18.添加isNonTrackableKeys函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/15.添加shallowReadonly方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/19.支持脱ref.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/16.添加shallowReactive方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/21.添加shallow方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/19.处理不需要的收集项.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/22.reactive添加delete方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/22.reactive添加delete方法.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/reactive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/reactive.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/shared/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/shared/src/index.ts" afterDir="false" />
@@ -36,6 +39,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="2DbxUF4PgxpWsPt6viOT0AMidaW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -74,7 +85,7 @@
       <workItem from="1660981600470" duration="1026000" />
       <workItem from="1660984058208" duration="10377000" />
       <workItem from="1661136689210" duration="24311000" />
-      <workItem from="1661303804749" duration="7230000" />
+      <workItem from="1661303804749" duration="27252000" />
     </task>
     <task id="LOCAL-00001" summary="初始化项目">
       <created>1661002414184</created>
@@ -132,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661267992844</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="添加readonly方法">
+      <created>1661324575484</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1661324575484</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +164,7 @@
     <MESSAGE value="完成toRefs/toRef方法" />
     <MESSAGE value="完成proxyRefs方法" />
     <MESSAGE value="更新用例" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新用例" />
+    <MESSAGE value="添加readonly方法" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加readonly方法" />
   </component>
 </project>

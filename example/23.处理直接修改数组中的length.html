@@ -7,17 +7,17 @@
 </head>
 <body>
 <div id="app"></div>
+<div id="app2"></div>
 <script>
 
     const {reactive,effect} = VueReactive
-    const data = {name:'zs',age:18}
-    const state = reactive(data)
+    const state = reactive([1,2,3])
     effect(()=>{
-        document.querySelector('#app').innerHTML = state.name + '你好呀'
+        document.querySelector('#app').innerHTML = state[2] // 页面中变为 undefined
     })
 
     setTimeout(()=>{
-       delete state.name
+        state.length = 1  // 处理前不会监听到数组长度的变化,处理后可以
     },1000)
 </script>
 </body>

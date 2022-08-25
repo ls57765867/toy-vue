@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    // 将一个对象标记为不可被转为代理。返回该对象本身。
+    // https://cn.vuejs.org/api/reactivity-advanced.html#markraw
+
+    const {markRaw, isReactive, reactive} = VueReactive
+    const foo = markRaw({})
+    console.log(isReactive(reactive(foo))) // false
+    // 也适用于嵌套在其他响应性对象
+    const bar = reactive({foo})
+    console.log(isReactive(bar.foo)) // false
+
+</script>
+</body>
+</html>

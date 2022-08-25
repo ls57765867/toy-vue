@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<div id="app2"></div>
+<script>
+    const {reactive,effect,ref} = VueReactive
+    // reactive的target为对象，value值为ref时支持脱ref(不需要使用.value获取数据)
+    const state = reactive({name:ref('zs')})
+    effect(()=>{
+        // #24.1
+        document.querySelector('#app').innerHTML = state.name // 不需要添加.value
+    })
+
+    setInterval(()=>{
+        // #24.2
+        state.name += 3   // 不需要添加.value
+    },100)
+</script>
+</body>
+</html>

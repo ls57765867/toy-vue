@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    const {reactive,isReactive} = VueReactive
+    const mySymbol = Symbol(100)
+    const state = reactive({name:'zs',foo:{mySymbol:'来了老弟?'}},)
+    console.log(isReactive(state.__proto__)); // 处理前 true 处理后为 false
+    console.log(isReactive(state.foo.mySymbol)); // 处理前 true 处理后为 false
+
+
+</script>
+</body>
+</html>

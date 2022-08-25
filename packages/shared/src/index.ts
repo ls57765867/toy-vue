@@ -1,7 +1,8 @@
 export const enum ReactiveFlags {
     IS_REACTIVE = '__v_isReactive',
     IS_REF = '__v_isRef',
-    IS_READONLY = '__v_isReadonly'
+    IS_READONLY = '__v_isReadonly',
+    IS_SHALLOW = '__v_isShallow',
 }
 
 export const isObject = (val) => {
@@ -17,6 +18,28 @@ export const isRef = val => !!val?.[ReactiveFlags.IS_REF]
 export const isFunction = val => typeof val === 'function'
 
 export const isReadonly = val => !!val[ReactiveFlags.IS_READONLY]
+
+export const isSymbol = val => typeof val === 'symbol'
+
+export function isShallow(value: unknown): boolean {
+    return !!(value?.[ReactiveFlags.IS_SHALLOW])
+}
+
+export const def = (target, key, val) => {
+    Object.defineProperty(target, key, {
+        value: val,
+        configurable: true, //可以删除
+        enumerable: false //不可枚举
+    })
+}
+
+export const toTypeString = (value): string =>
+    Object.prototype.toString.call(value)
+
+export const toRawType = (value): string => {
+    // 将 "[object String]" 转化为 String
+    return toTypeString(value).slice(8, -1)
+}
 
 const camelizeRE = /-(\w)/g;
 

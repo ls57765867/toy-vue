@@ -9,16 +9,11 @@
 <div id="app"></div>
 <script>
 
-    const {reactive,effect} = VueReactive
-    const data = {name:'zs',age:18}
+    const {toRaw, effect, reactive} = VueReactive
+    const data = {name: 'zs', age: 18, foo: {bar: 'bar'}}
     const state = reactive(data)
-    effect(()=>{
-        document.querySelector('#app').innerHTML = state.name + '你好呀'
-    })
+    console.log(toRaw(state) === data) // 应该相等
 
-    setTimeout(()=>{
-       delete state.name
-    },1000)
 </script>
 </body>
 </html>
