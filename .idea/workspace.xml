@@ -5,22 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5984fd62-d140-4839-a931-cf7eca4e3246" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/example/23.处理直接修改数组中的length.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/24.添加脱ref功能.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/21.重写响应式中的8种数组方法-2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/10.测试computed的set方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/10.添加computed的set方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/14.添加readonly方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/14.添加readonly方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/15.添加toRow方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/17.添加toRaw方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/16.添加markRow方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/18.添加markRow方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/17.部分数组内置方法处理.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/21.重写响应式中的8种数组方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/18.添加isNonTrackableKeys函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/15.添加shallowReadonly方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/19.支持脱ref.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/16.添加shallowReactive方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/21.添加shallow方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/19.处理不需要的收集项.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/22.reactive添加delete方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/22.reactive添加delete方法.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/20.reactive参数为数组时取消脱ref.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/20.重写响应式中的8种数组方法-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/21.重写响应式中的8种数组方法.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/baseHandler.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/effect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/reactivity/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/reactivity/src/reactive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/reactivity/src/reactive.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/shared/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/shared/src/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +75,7 @@
       <workItem from="1660981600470" duration="1026000" />
       <workItem from="1660984058208" duration="10377000" />
       <workItem from="1661136689210" duration="24311000" />
-      <workItem from="1661303804749" duration="27252000" />
+      <workItem from="1661303804749" duration="36750000" />
     </task>
     <task id="LOCAL-00001" summary="初始化项目">
       <created>1661002414184</created>
@@ -150,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661324575484</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="完善reactivity功能">
+      <created>1661411586632</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1661411586632</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +162,7 @@
     <MESSAGE value="完成proxyRefs方法" />
     <MESSAGE value="更新用例" />
     <MESSAGE value="添加readonly方法" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加readonly方法" />
+    <MESSAGE value="完善reactivity功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善reactivity功能" />
   </component>
 </project>

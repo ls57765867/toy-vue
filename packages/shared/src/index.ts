@@ -1,3 +1,5 @@
+// 参考：https://cloud.tencent.com/developer/article/1873869
+
 export const enum ReactiveFlags {
     IS_REACTIVE = '__v_isReactive',
     IS_REF = '__v_isRef',
@@ -17,7 +19,7 @@ export const isRef = val => !!val?.[ReactiveFlags.IS_REF]
 
 export const isFunction = val => typeof val === 'function'
 
-export const isReadonly = val => !!val[ReactiveFlags.IS_READONLY]
+export const isReadonly = val => !!val?.[ReactiveFlags.IS_READONLY]
 
 export const isSymbol = val => typeof val === 'symbol'
 
@@ -40,6 +42,12 @@ export const toRawType = (value): string => {
     // 将 "[object String]" 转化为 String
     return toTypeString(value).slice(8, -1)
 }
+// 传入的值是否为
+export const isIntegerKey = (key) =>
+    isString(key) &&
+    key !== 'NaN' &&
+    key[0] !== '-' &&
+    '' + parseInt(key, 10) === key
 
 const camelizeRE = /-(\w)/g;
 

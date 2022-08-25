@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../packages/reactivity/dist/reactivity.global.js"></script>
+</head>
+<body>
+<div id='app'></div>
+<script>
+    // #20 'includes', 'indexOf', 'lastIndexOf' 会先从代理值中寻找如果没找到会从toRaw原始值中寻找
+    const { reactive,effect } = VueReactive
+    const data = {name:'zs'}
+    const state = reactive([data])
+
+    console.log(state.includes(data)) //处理前为false
+</script>
+</body>
+</html>

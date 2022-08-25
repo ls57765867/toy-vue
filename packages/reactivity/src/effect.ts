@@ -1,4 +1,4 @@
-import {isArray} from "../../shared";
+import {isArray, isIntegerKey} from "@ls-toy-vue/shared";
 
 let activeEffect = null
 const targetMap = new WeakMap()
@@ -20,14 +20,24 @@ export class ReactiveEffect {
     }
 
     run() {
+        let lastShouldTrack = shouldTrack
+        while (this.parent) {
+            if (this.parent === this) {
+                return
+            }
+            parent = parent.parent
+        }
         try {
             if (!this.active) return this.fn()
             this.parent = activeEffect
             activeEffect = this
+            shouldTrack = true
             cleanupEffect(this)
             return this.fn()
         } finally {
             activeEffect = this.parent
+            shouldTrack = lastShouldTrack
+            this.parent = undefined
         }
 
     }
@@ -48,20 +58,34 @@ export const cleanupEffect = (effect) => {
     effect.deps.length = 0
 }
 
+export let shouldTrack = true
+const trackStack: boolean[] = []
+
+export function pauseTracking() {
+    trackStack.push(shouldTrack)
+    shouldTrack = false
+}
+
+export function resetTracking() {
+    const last = trackStack.pop()
+    shouldTrack = last === undefined ? true : last
+}
+
 
 export const track = (target, key) => {
-    let depsMap = targetMap.get(target)
-    if (!depsMap) {
-        targetMap.set(target, depsMap = new Map)
+    if (shouldTrack && activeEffect) {
+        let depsMap = targetMap.get(target)
+        if (!depsMap) {
+            targetMap.set(target, depsMap = new Map)
+        }
+        let deps = depsMap.get(key)
+        if (!deps) {
+            depsMap.set(key, deps = new Set)
+        }
+        trackEffect(deps)
     }
-    let deps = depsMap.get(key)
-    if (!deps) {
-        depsMap.set(key, deps = new Set)
-    }
-    trackEffect(deps)
 }
 export const trackEffect = (deps) => {
-    if (!activeEffect) return
     if (!deps.has(activeEffect)) {
         deps.add(activeEffect)
         activeEffect.deps.push(deps)
@@ -70,14 +94,15 @@ export const trackEffect = (deps) => {
 
 export const trigger = (target, type, key, newValue?) => {
     let deps = []
-    console.log(target, type, key);
     const depsMap = targetMap.get(target)
     if (!depsMap) return
-    const effects = depsMap.get(key)
-
+    let effects = depsMap.get(key) || new Set
+    // #21
+    if (isIntegerKey(key)) {
+        deps.push(depsMap.get('length'))
+    }
     // #23 处理直接修改length
     if (key === 'length' && isArray(target)) {
-        console.log(depsMap);
         depsMap.forEach((dep, _key) => {
             // _key为下标,newValue为新数组的长度
             // 执行state.length = 1修改长度时，对大于等于新数组长度的下标进行更新
@@ -87,16 +112,17 @@ export const trigger = (target, type, key, newValue?) => {
         })
         triggerEffect(deps[0])
     }
-
-    if (!effects) return;
-
-
+    for (const dep of deps) {
+        if (dep) {
+            effects.add(...dep)
+        }
+    }
     triggerEffect(effects)
 }
 export const triggerEffect = (effects) => {
     const _effects: any = new Set(effects)
     _effects.forEach(effect => {
-        if (effect !== activeEffect) {
+        if (effect !== activeEffect && effect) {
             const scheduler = effect.scheduler
             if (scheduler) {
                 scheduler()
